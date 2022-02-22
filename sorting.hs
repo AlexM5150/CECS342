@@ -1,6 +1,12 @@
-quicksort :: (Ord a) => [a] -> [a]  
-quicksort [] = []  
-quicksort (x:xs) =   
-    let smallerSorted = quicksort [a | a <- xs, a <= x]  
-        biggerSorted = quicksort [a | a <- xs, a > x]  
-    in  smallerSorted ++ [x] ++ biggerSorted  
+quick :: (Ord a) => [a] -> [a]  
+quick [] = []  
+quick (x:xs) =   
+    let smaller = quick [a | a <- xs, a <= x]  
+        bigger = quick [a | a <- xs, a > x]  
+    in  smaller ++ [x] ++ bigger 
+
+merge :: Ord a => [a] -> [a] -> [a]
+merge xs [] = xs
+merge [] ys = ys
+merge (x:xs) (y:ys) | x <= y    = x:merge xs (y:ys)
+                    | otherwise = y:merge (x:xs) ys 
