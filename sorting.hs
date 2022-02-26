@@ -1,10 +1,10 @@
 module Main where
     qsort :: (Ord a) => [a] -> [a]  
-    qsort [] = []  
-    qsort (x:xs) =   
-        let smaller = qsort [a | a <- xs, a <= x]  
-            bigger = qsort [a | a <- xs, a > x]  
-        in  smaller ++ [x] ++ bigger 
+    quicksort [] = []
+    quicksort (x:xs) = (quicksort lesser) ++ [x] ++ (quicksort greater)
+    where
+        lesser = filter (< x) xs
+        greater = filter (>= x) xs
 
     msort :: Ord a => [a] -> [a] -> [a]
     msort xs [] = xs
